@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block body_block %}
+    <div>
+        <h1>
+            Your Albums
+        </h1>
+    </div>
+    <div class="album_container container">
+        <div class="row">
+            <div class="col-md-12">
+
+
+
+                <div class="col-md-4">
+                  <div class="thumbnail">
+                    <a href="/w3images/fjords.jpg" target="_blank">
+                      <img src="/w3images/fjords.jpg" alt="Fjords" style="width:100%">
+                      <div class="caption">
+                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                      </div>
+
+                      <div class="navbar">
+                        <div class="container-fluid">
+                            <ul>
+                                <li><a href="#"> <span class="glyphicon glyphicon-trash"></span> </a></li>
+                                <li><a href="#"> <span class="glyphicon glyphicon-star-empty"></span> </a></li>
+                            </ul>
+                        </div>
+                      </div>
+
+                    </a>
+                  </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
