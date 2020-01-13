@@ -6,14 +6,24 @@ app_name = 'gallery'
 
 urlpatterns = [
 
-    re_path(r'^/$', views, name='home'),
-    re_path(r'^(?P<album_id>[0-9]{4])/$', views, name='album-display'),
-    url(r'^logout/$', views, name='log-out'),
+    re_path(r'^/$', views.IndexView.as_view, name='home'),
+    re_path(r'^(?P<pk>[0-9]{4])/$', views.AlbumDetailView.as_view, name='album-display'),
+    # url(r'^logout/$', views, name='log-out'),
     re_path(r'^create/$', views, name='create-album'),
-    re_path(r'^(?P<album_id>[0-9]{4])/upload$', views, name='upload-image'),
+    re_path(r'^(?P<pk>[0-9]{4])/upload$', views, name='upload-image'),
 
     #Starring albums
-    re_path(r'^(?P<album_id>[0-9]{4}/star) $', views, name='star'),
-    re_path(r'^(?P<album_id>[0-9]{4}/unstar) $', views, name='unstar')
+    re_path(r'^(?P<pk>[0-9]{4}/star-album)/$', views, name='star-album'),
+    re_path(r'^(?P<pk>[0-9]{4}/unstar-album)/$', views, name='unstar-album'),
+
+    #Delete album
+    re_path(r'^(?P<pk>[0-9]{4}/delete-album)/$', views, name='delete-album'),
+
+    # Starring pics
+    re_path(r'^(?P<album_id>[0-9]{4}/star-pic)/$', views, name='star-pic'),
+    re_path(r'^(?P<album_id>[0-9]{4}/unstar-pic)/$', views, name='unstar-pic'),
+
+    # Delete pics
+    re_path(r'^(?P<album_id>[0-9]{4}/delete-pic)/$', views, name='delete-pic'),
 
 ]
