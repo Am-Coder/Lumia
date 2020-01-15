@@ -1,43 +1,46 @@
 {% extends "base.html" %}
 
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'gallery/css' %}" />
-<script type="javascript" src="{% static 'gallery/js' %}"></script>
+{#{% load staticfiles %}#}
+{#<link rel="stylesheet" type="text/css" href="{% static 'gallery/css' %}" />#}
+{#<script type="javascript" src="{% static 'gallery/js' %}"></script>#}
 
 
 {% block body_block %}
+    <br>
+    <br>
     <div>
         <h1>
             Your Albums
         </h1>
     </div>
+        <br>
+    <br>
     <div class="album_container container">
         <div class="row">
             <div class="col-md-12">
 
-
-
+            {% for album in all_albums %}
                 <div class="col-md-4">
                   <div class="thumbnail">
-                    <a href="/w3images/fjords.jpg" target="_blank">
-                      <img src="/w3images/fjords.jpg" alt="Fjords" style="width:100%">
+                    <a href="{% url "gallery:album-display" %}" target="_blank">
+                      <img src="{{ album.album_logo.url }}" style="width:100%">
                       <div class="caption">
-                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                        <h3>{{ album.album_name }}</h3>
+                        <p>{{ album.album_short_des }}</p>
                       </div>
 
-                      <div class="navbar">
-                        <div class="container-fluid">
-                            <ul>
-                                <li><a href="#"> <span class="glyphicon glyphicon-trash"></span> </a></li>
-                                <li><a href="#"> <span class="glyphicon glyphicon-star-empty"></span> </a></li>
-                            </ul>
-                        </div>
-                      </div>
 
+                      <a href="#"> <span class="glyphicon glyphicon-trash"></span> </a>
+                        &nbsp;&nbsp;
+                        {% if album.album_starred %}&nbsp;&nbsp;
+                      <a href="#"> <span class="glyphicon glyphicon-star-empty" style="color: gold"></span> </a>
+                        {% else %}
+                      <a href="#"> <span class="glyphicon glyphicon-star-empty"></span> </a>
+                        {% endif %}
                     </a>
                   </div>
                 </div>
-
+            {% endfor %}
 
             </div>
         </div>

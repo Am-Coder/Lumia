@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "base.html" %}
+
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'gallery/css' %}" />
     <script type="javascript" src="{% static 'gallery/js' %}"></script>
 
 
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    {% extends "base.html" %}
     {% block body_block %}
+        <br>
+        <br>
         <div class="image-gallery">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
               <!-- Indicators -->
@@ -25,7 +21,7 @@
               <div class="carousel-inner">
 
                 <div class="item active">
-                  <img src="la.jpg" alt="Chania">
+                  <img src="/media/halo.jpg" alt="Chania">
                   <div class="carousel-caption">
                     <h3>Los Angeles</h3>
                     <p>LA is always so much fun!</p>
@@ -44,40 +40,28 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
-
+            <br>
             <div class="container">
-              <h2>Image Gallery</h2>
+              <div class="imageAdder">
+                  <a data-toggle="modal" data-target="#imageModal">
+                      <span class="glyphicon glyphicon-plus-sign" style="font-size:30px"></span>
+                  </a>
+              </div>
+                <br>
               <div class="row">
 
-
                 <div class="col-md-4">
                   <div class="thumbnail">
-                    <a href="/w3images/lights.jpg" target="_blank">
-                      <img src="/w3images/lights.jpg" alt="Lights" style="width:100%">
-                      <div class="caption">
-                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-
-
-                <div class="col-md-4">
-                  <div class="thumbnail">
-                    <a href="/w3images/fjords.jpg" target="_blank">
-                      <img src="/w3images/fjords.jpg" alt="Fjords" style="width:100%">
+                    <a href="/media/halo.jpg" target="_blank">
+                      <img src="/media/halo.jpg" alt="Fjords" style="width:100%">
                       <div class="caption">
                         <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
                       </div>
 
-                      <div class="navbar">
-                        <div class="container-fluid">
-                            <ul>
-                                <li><a href="#"> <span class="glyphicon glyphicon-trash"></span> </a></li>
-                                <li><a href="#"> <span class="glyphicon glyphicon-star-empty"></span> </a></li>
-                            </ul>
-                        </div>
-                      </div>
+
+                      <a href="#"> <span class="glyphicon glyphicon-trash"></span> </a>
+                                &nbsp;&nbsp;
+                      <a href="#"> <span class="glyphicon glyphicon-star-empty"></span> </a>
 
                     </a>
                   </div>
@@ -86,10 +70,31 @@
               </div>
             </div>
 
+      <div class="modal fade" id="imageModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <form class="modal-content" method="post" action="{% url "gallery:upload-image" album.album_id %}">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Create Album</h4>
+            </div>
 
+
+            <div class="modal-body">
+                    {% csrf_token %}
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default" >Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+            </form>
+          </div>
+        </div>
 
 
         </div>
     {% endblock %}
-</body>
-</html>
