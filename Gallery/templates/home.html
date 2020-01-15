@@ -22,7 +22,7 @@
             {% for album in all_albums %}
                 <div class="col-md-4">
                   <div class="thumbnail">
-                    <a href="{% url "gallery:album-display" %}" target="_blank">
+                    <a href="{% url "gallery:album-display" album.album_id %}" target="_blank">
                       <img src="{{ album.album_logo.url }}" style="width:100%">
                       <div class="caption">
                         <h3>{{ album.album_name }}</h3>
@@ -30,7 +30,7 @@
                       </div>
 
 
-                      <a href="#"> <span class="glyphicon glyphicon-trash"></span> </a>
+                      <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
                         &nbsp;&nbsp;
                         {% if album.album_starred %}&nbsp;&nbsp;
                       <a href="#"> <span class="glyphicon glyphicon-star-empty" style="color: gold"></span> </a>

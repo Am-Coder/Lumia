@@ -11,7 +11,7 @@ from django.contrib.auth import logout
 class IndexView(generic.ListView):
     template_name = 'home.html'
     context_object_name = 'all_albums'
-
+    paginate_by = 10
     def get_queryset(self):
         return Album.objects.all()
 
@@ -25,17 +25,18 @@ class AlbumDetailView(generic.DetailView):
     model = Album
     context_object_name = 'album'
     template_name = 'gallery.html'
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = form.ImageForm
+        context['form1'] = form.ImageForm
+        context['form'] = form.AlbumForm
         return context
 
 
 def logout_view(request):
     logout(request)
 
-@login_required()
+@login_required
 def create(request):
     if(request.method == 'POST'):
         myform = form.AlbumForm(request.POST, request.FILES)
@@ -50,18 +51,21 @@ def create(request):
             album.save()
             return redirect(album.get_absolute_url())
 
-    return redirect(reverse("gallery:album-display"))
+    return redirect(reverse("gallery:home"))
 
+@login_required
 def upload(request,pk):
     if(request.method == 'POST'):
+        # print(pk + request.POST.get('image_short_des'))
         myform = form.ImageForm(request.POST, request.FILES)
         if myform.is_valid():
             data = myform.cleaned_data
             image = Image()
-            image.album_id = Album.objects.get(pk)
+            image.album_id = Album.objects.get(album_id =pk)
             image.image_starred = data['image_starred']
             image.image_short_des = data['image_short_des']
+            image.image_file = data['image_file']
             image.save()
             return redirect(image.get_absolute_url())
-
-    return redirect(reverse("gallery:album-display"))
+        print(myform.errors)
+    return redirect(reverse("gallery:home"))
