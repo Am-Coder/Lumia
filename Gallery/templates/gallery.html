@@ -75,8 +75,8 @@
                       </div>
 
 
-                      <a href="#"> <span class="glyphicon glyphicon-trash"></span> </a>
-                &nbsp;&nbsp;    {% if image.image_starred is not True %}
+                      <a href="{% url "gallery:delete-pic" image.image_id %}"> <span class="glyphicon glyphicon-trash"></span> </a>
+                &nbsp;&nbsp;      {% if image.image_starred is not True %}
                           <a href="#"> <span class="glyphicon glyphicon-star-empty"></span> </a>
                         {% else %}
                           <a href="#"> <span class="glyphicon glyphicon-star-empty" style="color: gold"></span> </a>

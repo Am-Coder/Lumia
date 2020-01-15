@@ -30,7 +30,7 @@
                       </div>
 
 
-                      <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
+                      <a href="{% url "gallery:delete-album" album.album_id %}"><span class="glyphicon glyphicon-trash"></span></a>
                         &nbsp;&nbsp;
                         {% if album.album_starred %}&nbsp;&nbsp;
                       <a href="#"> <span class="glyphicon glyphicon-star-empty" style="color: gold"></span> </a>

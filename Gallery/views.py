@@ -70,3 +70,16 @@ def upload(request,pk):
             return redirect(image.get_absolute_url())
         print(myform.errors)
     return redirect(reverse("gallery:home"))
+
+@login_required
+def deleteAlbum(request,pk):
+    print(pk)
+    Album.objects.get(album_id=pk).delete()
+    return redirect(reverse("gallery:home"))
+
+@login_required
+def deleteImage(request,pk):
+    image = Image.objects.get(image_id=pk)
+    urlred = image.get_absolute_url()
+    image.delete()
+    return redirect(urlred)
