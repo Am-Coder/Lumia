@@ -12,6 +12,7 @@ class IndexView(generic.ListView):
     template_name = 'home.html'
     context_object_name = 'all_albums'
     paginate_by = 10
+
     def get_queryset(self):
         return Album.objects.all()
 
@@ -25,7 +26,7 @@ class AlbumDetailView(generic.DetailView):
     model = Album
     context_object_name = 'album'
     template_name = 'gallery.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form1'] = form.ImageForm

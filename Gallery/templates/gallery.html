@@ -41,6 +41,8 @@
               </a>
             </div>
             <br>
+
+
             <div class="container">
               <div class="imageAdder">
                   <a data-toggle="modal" data-target="#imageModal1">
@@ -48,25 +50,30 @@
                   </a>
               </div>
                 <br>
-              <div class="row">
 
+
+              <div class="row">
+{#                {% all_image = album.image_set.all %}#}
+              {% for image in album.image_set.all %}
                 <div class="col-md-4">
                   <div class="thumbnail">
-                    <a href="/media/halo.jpg" target="_blank">
-                      <img src="/media/halo.jpg" alt="Fjords" style="width:100%">
+                    <a href="{{ image.image_file.url }}" target="_blank">
+                      <img src="{{ image.image_file.url }}" alt="{{ image.image_short_des }}" style="width:100%">
                       <div class="caption">
-                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                        <p>{{ image.image_short_des }}</p>
                       </div>
 
 
                       <a href="#"> <span class="glyphicon glyphicon-trash"></span> </a>
-                                &nbsp;&nbsp;
-                      <a href="#"> <span class="glyphicon glyphicon-star-empty"></span> </a>
-
+                &nbsp;&nbsp;    {% if image.image_starred is not True %}
+                          <a href="#"> <span class="glyphicon glyphicon-star-empty"></span> </a>
+                        {% else %}
+                          <a href="#"> <span class="glyphicon glyphicon-star-empty" style="color: gold"></span> </a>
+                        {% endif %}
                     </a>
                   </div>
                 </div>
-
+            {% endfor %}
               </div>
             </div>
 
