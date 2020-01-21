@@ -1,12 +1,12 @@
-from django.shortcuts import render,get_object_or_404,redirect
+from django.shortcuts import redirect
 from django.views import generic
 from .models import *
 from . import form
 from django.urls import reverse
-from django.views.generic import CreateView,UpdateView,DeleteView
+# from django.views.generic import CreateView,UpdateView,DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-
+from registration.models import User
 from django.http import JsonResponse
 # Create your views here.
 
@@ -17,7 +17,7 @@ class IndexView(generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Album.objects.all()
+        return Album.objects.filter(user_id=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

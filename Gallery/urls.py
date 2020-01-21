@@ -14,9 +14,7 @@ urlpatterns = [
 
     # #Starring albums
     re_path(r'^(?P<pk>[0-9]+)/toggle/$', views.toggleFavourite, name='toggle-favourite'),
-    # re_path(r'^(?P<pk>[0-9]{4}/star-album)/$', views, name='star-album'),
-    # re_path(r'^(?P<pk>[0-9]{4}/unstar-album)/$', views, name='unstar-album'),
-    #
+
     # #Delete album
     re_path(r'^(?P<pk>[0-9]+)/delete-album/$', views.deleteAlbum, name='delete-album'),
     #
