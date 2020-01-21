@@ -8,7 +8,7 @@ urlpatterns = [
 
     re_path(r'^$', views.IndexView.as_view(), name='home'),
     re_path(r'^(?P<pk>[0-9]+)/$', views.AlbumDetailView.as_view(), name='album-display'),
-    # url(r'^logout/$', views.logout, name='log-out'),
+    url(r'^logout/$', views.signout, name='sign-out'),
     re_path(r'^create/$', views.create, name='create-album'),
     re_path(r'^(?P<pk>[0-9]+)/upload/$', views.upload, name='upload-image'),
 

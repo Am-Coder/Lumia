@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.views.generic import CreateView,UpdateView,DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+
 from django.http import JsonResponse
 # Create your views here.
 
@@ -37,8 +38,10 @@ class AlbumDetailView(generic.DetailView):
 
 
 @login_required
-def logout_view(request):
+def signout(request):
+    print("HI")
     logout(request)
+    return redirect(reverse("register:index"))
 
 
 @login_required
@@ -60,7 +63,7 @@ def create(request):
 
 
 @login_required
-def upload(request,pk):
+def upload(request, pk):
     if request.method == 'POST':
         # print(pk + request.POST.get('image_short_des'))
         myform = form.ImageForm(request.POST, request.FILES)
@@ -78,14 +81,14 @@ def upload(request,pk):
 
 
 @login_required
-def deleteAlbum(request,pk):
+def deleteAlbum(request, pk):
     print(pk)
     Album.objects.get(album_id=pk).delete()
     return redirect(reverse("gallery:home"))
 
 
 @login_required
-def deleteImage(request,pk):
+def deleteImage(request, pk):
     image = Image.objects.get(image_id=pk)
     urlred = image.get_absolute_url()
     image.delete()
