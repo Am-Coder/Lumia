@@ -13,6 +13,7 @@ urlpatterns = [
     re_path(r'^(?P<pk>[0-9]+)/upload/$', views.upload, name='upload-image'),
 
     # #Starring albums
+    re_path(r'^(?P<pk>[0-9]+)/toggle/$', views.toggleFavourite, name='toggle-favourite'),
     # re_path(r'^(?P<pk>[0-9]{4}/star-album)/$', views, name='star-album'),
     # re_path(r'^(?P<pk>[0-9]{4}/unstar-album)/$', views, name='unstar-album'),
     #

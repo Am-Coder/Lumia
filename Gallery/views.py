@@ -6,7 +6,9 @@ from django.urls import reverse
 from django.views.generic import CreateView,UpdateView,DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.http import JsonResponse
 # Create your views here.
+
 
 class IndexView(generic.ListView):
     template_name = 'home.html'
@@ -34,12 +36,14 @@ class AlbumDetailView(generic.DetailView):
         return context
 
 
+@login_required
 def logout_view(request):
     logout(request)
 
+
 @login_required
 def create(request):
-    if(request.method == 'POST'):
+    if request.method == 'POST':
         myform = form.AlbumForm(request.POST, request.FILES)
         if myform.is_valid():
             data = myform.cleaned_data
@@ -54,9 +58,10 @@ def create(request):
 
     return redirect(reverse("gallery:home"))
 
+
 @login_required
 def upload(request,pk):
-    if(request.method == 'POST'):
+    if request.method == 'POST':
         # print(pk + request.POST.get('image_short_des'))
         myform = form.ImageForm(request.POST, request.FILES)
         if myform.is_valid():
@@ -71,11 +76,13 @@ def upload(request,pk):
         print(myform.errors)
     return redirect(reverse("gallery:home"))
 
+
 @login_required
 def deleteAlbum(request,pk):
     print(pk)
     Album.objects.get(album_id=pk).delete()
     return redirect(reverse("gallery:home"))
+
 
 @login_required
 def deleteImage(request,pk):
@@ -83,3 +90,11 @@ def deleteImage(request,pk):
     urlred = image.get_absolute_url()
     image.delete()
     return redirect(urlred)
+
+
+@login_required
+def toggleFavourite(request, pk):
+    album = Album.objects.get(album_id=pk)
+    album.album_starred = not album.album_starred
+    album.save()
+    return JsonResponse({'status': album.album_starred})

@@ -1,8 +1,5 @@
 {% extends "base.html" %}
 
-{#{% load staticfiles %}#}
-{#<link rel="stylesheet" type="text/css" href="{% static 'gallery/css' %}" />#}
-{#<script type="javascript" src="{% static 'gallery/js' %}"></script>#}
 
 
 {% block body_block %}
@@ -32,10 +29,10 @@
 
                       <a href="{% url "gallery:delete-album" album.album_id %}"><span class="glyphicon glyphicon-trash"></span></a>
                         &nbsp;&nbsp;
-                        {% if album.album_starred %}&nbsp;&nbsp;
-                      <a href="#"> <span class="glyphicon glyphicon-star-empty" style="color: gold"></span> </a>
+                        {% if album.album_starred %}
+                      <a href="{% url "gallery:toggle-favourite" album.album_id %}" id="favourite"> <span class="glyphicon glyphicon-star-empty" style="color: gold" id="star"></span> </a>
                         {% else %}
-                      <a href="#"> <span class="glyphicon glyphicon-star-empty"></span> </a>
+                      <a href="{% url "gallery:toggle-favourite" album.album_id %}" id="favourite"> <span class="glyphicon glyphicon-star-empty" id="star"></span> </a>
                         {% endif %}
                     </a>
                   </div>
@@ -47,3 +44,4 @@
     </div>
 
 {% endblock %}
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        html {
+          background-image:linear-gradient(#eee, #aaa);
+          height:100%;
+        }
+
+        img {
+          border:solid 2px;
+          border-bottom-color:#ffe;
+          border-left-color:#eed;
+          border-right-color:#eed;
+          border-top-color:#ccb;
+          max-height:100%;
+          max-width:100%;
+        }
+
+        .frame {
+          background-color:#ddc;
+          border:solid 5vmin #eee;
+          border-bottom-color:#fff;
+          border-left-color:#eee;
+          border-radius:2px;
+          border-right-color:#eee;
+          border-top-color:#ddd;
+          box-shadow:0 0 5px 0 rgba(0,0,0,.25) inset, 0 5px 10px 5px rgba(0,0,0,.25);
+          box-sizing:border-box;
+          display:inline-block;
+          margin:10vh 10vw;
+          height:80vh;
+          padding:8vmin;
+          position:relative;
+          text-align:center;
+          &:before {
+            border-radius:2px;
+            bottom:-2vmin;
+            box-shadow:0 2px 5px 0 rgba(0,0,0,.25) inset;
+            content:"";
+            left:-2vmin;
+            position:absolute;
+            right:-2vmin;
+            top:-2vmin;
+          }
+          &:after {
+            border-radius:2px;
+            bottom:-2.5vmin;
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,.25);
+            content:"";
+            left:-2.5vmin;
+            position:absolute;
+            right:-2.5vmin;
+            top:-2.5vmin;
+          }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="frame">
+                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/71829/mona-lisa.jpg" alt="Mona Lisa" />
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                    <a href="#" class="btn btn-primary " data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-register"></span>Register</a>
+                    <a href="#" class="btn btn-primary " data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-log-out"></span> Sign In</a>
+
+              <div class="modal fade" id="myModal1" role="dialog">
+                <div class="modal-dialog modal-lg">
+                  <form class="modal-content" method="post" enctype="multipart/form-data" action="">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Sign In</h4>
+                    </div>
+
+
+                    <div class="modal-body">
+                            {% csrf_token %}
+                            <table>
+                                {{ form1.as_table }}
+                            </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default" >Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+
+                    </form>
+                  </div>
+                </div>
+
+                  <div class="modal fade" id="myModal2" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                      <form class="modal-content" method="post" enctype="multipart/form-data" action="{% url "gallery:create-album" %}">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Sign Up</h4>
+                        </div>
+
+
+                        <div class="modal-body">
+                                {% csrf_token %}
+                                <table>
+                                    {{ form2.as_table }}
+                                </table>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-default" >Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+
+                        </form>
+                      </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
